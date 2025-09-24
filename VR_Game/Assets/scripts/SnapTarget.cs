@@ -14,6 +14,10 @@ public class SnapTarget : MonoBehaviour
     public float snapSpeed = 5f;
     public bool freezeSnap = false;
 
+    [Header("toturial manager")]
+    public int tutorialIndex = 0;
+    [SerializeField]private ToturialManager tutorialManager;
+
     private XRGrabInteractable interactable;
     private Transform snapPoint;
     private Coroutine snapRoutine;
@@ -39,6 +43,8 @@ public class SnapTarget : MonoBehaviour
 
         interactable.selectExited.AddListener(OnRealese);
         interactable.selectEntered.AddListener(OnGrab);
+
+        tutorialManager = Object.FindFirstObjectByType<ToturialManager>();
 
         Debug.Log(gameObject.name + " started in state" + snapState);
         
@@ -79,7 +85,12 @@ public class SnapTarget : MonoBehaviour
         }
         snapState = SnapState.Ideal; // reset while grabbing
         Debug.Log(gameObject.name + " grabbed state: " + snapState);
-        
+
+        if (tutorialManager != null)
+        {
+            Debug.Log($"SnapTarget: notifying tutorial OnObjectPicked({tutorialIndex})");
+            tutorialManager.OnObjectPicked(tutorialIndex);
+        }
     }
 
     private void OnRealese(SelectExitEventArgs args)
@@ -143,6 +154,12 @@ public class SnapTarget : MonoBehaviour
         snapState = SnapState.Rest;
         Debug.Log(gameObject.name + " state changed" + snapState);
 
-        
+        // notify tutorial manager that this object has been placed
+        if (tutorialManager != null)
+        {
+            Debug.Log($"SnapTarget: notifying tutorial OnObjectPlaced({tutorialIndex})");
+            tutorialManager.OnObjectPlaced(tutorialIndex);
+        }
+
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit;
-using System;
+using System.Collections;
 
 public class ToturialManager : MonoBehaviour
 {
@@ -31,18 +31,13 @@ public class ToturialManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        arrowInstance=Instantiate(arrowPrefab);
+        arrowInstance = Instantiate(arrowPrefab);
         arrowInstance.SetActive(false);
 
-        objectPicked = new bool[objectSpot.Length];
-        ShowMessage("Go near the chopstick");
+        objectPicked = new bool[Mathf.Max(1, objectSpot.Length)];
+        ShowMessage("Follow the Arrow to start.");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     void ShowMessage(string text)
     {
         messagepanel.SetActive(true);
@@ -56,41 +51,68 @@ public class ToturialManager : MonoBehaviour
 
         if (steps < objectSpot.Length)
         {
-            // Show arrow to the current object
-            arrowInstance.transform.position = objectSpot[steps].position;
+            // Use the arrow component's SetBasePosition method (keeps floating behavior correct)
+            var floatScript = arrowInstance.GetComponent<Arrow>();
+            if (floatScript != null)
+            {
+                floatScript.SetBasePosition(objectSpot[steps].position);
+            }
+            else
+            {
+                // fallback
+                arrowInstance.transform.position = objectSpot[steps].position;
+            }
             arrowInstance.SetActive(true);
-
-            ShowMessage($"Pick object {steps + 1} and place it on the marked spot.");
         }
 
     }
 
     // call this when chopstick is picked
-    
+
     public void OnObjectPicked(int index)
     {
+        Debug.Log($"Tutorial: OnObjectPicked({index}), current step={steps}");
         if (index == steps && !objectPicked[index])
         {
             objectPicked[index] = true;
 
-            // Move arrow to placement spot
+            // hide arrow at object immediately (player grabbed it)
+            if (arrowInstance != null) arrowInstance.SetActive(false);
+
+            // then move arrow to placement spot and show it after a short delay
+            StartCoroutine(RepositionArrowToPlace(index));
+        }
+    }
+
+    private IEnumerator RepositionArrowToPlace(int index)
+    {
+        // small delay so the arrow disappears while the player's hand holds object
+        yield return new WaitForSeconds(0.15f);
+
+        if (index < placedSpot.Length && arrowInstance != null)
+        {
             arrowInstance.transform.position = placedSpot[index].position;
+            arrowInstance.SetActive(true);
+            Debug.Log($"Tutorial: arrow moved to placedSpot[{index}] and shown");
         }
     }
 
     // when chopstick is place
-    
+
     public void OnObjectPlaced(int index)
     {
+        Debug.Log($"Tutorial: OnObjectPlaced({index}), current step={steps}");
         if (index == steps)
         {
-            arrowInstance.SetActive(false);
+            // hide arrow when placed
+            if (arrowInstance != null) arrowInstance.SetActive(false);
 
             steps++;
 
             if (steps < objectSpot.Length)
             {
-                ShowMessage($"Great! You placed object {index}. Now go pick object {steps + 1}.");
+                // show next instruction and wait for OK to show the arrow
+                ShowMessage($"Great! You placed object {index + 1}. Press OK to continue to the next item.");
             }
             else
             {

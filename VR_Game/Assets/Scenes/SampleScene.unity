@@ -6272,7 +6272,7 @@ Transform:
   m_GameObject: {fileID: 1050174723}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.193, y: 0.946, z: -1.153}
+  m_LocalPosition: {x: -1.193, y: 1.05, z: -1.153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7769,6 +7769,8 @@ MonoBehaviour:
   - Plate
   snapSpeed: 5
   freezeSnap: 0
+  tutorialIndex: 0
+  tutorialManager: {fileID: 0}
 --- !u!1 &1604432798 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 579859729930370721, guid: 6756e4e5a7e512645b74ab2adcddeaef, type: 3}
@@ -9121,7 +9123,7 @@ Transform:
   m_GameObject: {fileID: 1863490252}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.115, y: 1.066, z: -1.126}
+  m_LocalPosition: {x: -2.115, y: 1.07, z: -1.126}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10357,6 +10359,8 @@ MonoBehaviour:
   - ChopStick
   snapSpeed: 5
   freezeSnap: 0
+  tutorialIndex: 0
+  tutorialManager: {fileID: 2088268917}
 --- !u!1001 &2494138987719610920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10665,6 +10669,8 @@ MonoBehaviour:
   - Dumbling
   snapSpeed: 5
   freezeSnap: 0
+  tutorialIndex: 0
+  tutorialManager: {fileID: 0}
 --- !u!1001 &4724488101625353308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10992,6 +10998,8 @@ MonoBehaviour:
   - Bowl
   snapSpeed: 5
   freezeSnap: 0
+  tutorialIndex: 0
+  tutorialManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
