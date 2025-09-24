@@ -44,7 +44,12 @@ public class SnapTarget : MonoBehaviour
         interactable.selectExited.AddListener(OnRealese);
         interactable.selectEntered.AddListener(OnGrab);
 
-        tutorialManager = Object.FindFirstObjectByType<ToturialManager>();
+        if (tutorialManager == null)
+        {
+            tutorialManager = Object.FindFirstObjectByType<ToturialManager>();
+
+        }
+        
 
         Debug.Log(gameObject.name + " started in state" + snapState);
         
