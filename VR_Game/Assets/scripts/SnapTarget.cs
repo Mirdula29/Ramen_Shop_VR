@@ -47,8 +47,7 @@ public class SnapTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // current state every frame
-        //Debug.Log(gameObject.name + " current state" + snapState);
+       
 
     }
 
@@ -80,6 +79,7 @@ public class SnapTarget : MonoBehaviour
         }
         snapState = SnapState.Ideal; // reset while grabbing
         Debug.Log(gameObject.name + " grabbed state: " + snapState);
+        
     }
 
     private void OnRealese(SelectExitEventArgs args)
@@ -142,5 +142,7 @@ public class SnapTarget : MonoBehaviour
         }
         snapState = SnapState.Rest;
         Debug.Log(gameObject.name + " state changed" + snapState);
+
+        
     }
 }

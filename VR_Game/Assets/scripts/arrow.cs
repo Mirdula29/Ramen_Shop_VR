@@ -1,23 +1,24 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class arrow : MonoBehaviour
+public class Arrow : MonoBehaviour
 {
-    public float rotation = 100f;
-    public float hight = 0.5f;
+
+    public float hight = 0.2f;
     public float speed = 2f;
+    
+
+    private Vector3 position;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //position = transform.position;
+        position = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.up, rotation * Time.deltaTime);
-
-        //float y = position.y + Mathf.Sin(Time.time * speed) * hight;
-        //transform.position = new Vector3(transform.position.x, y, position.z);
+        float y = position.y + Mathf.Sin(Time.time * speed) * (hight/4);
+        transform.position = new Vector3(transform.position.x, y, position.z);
     }
 }
