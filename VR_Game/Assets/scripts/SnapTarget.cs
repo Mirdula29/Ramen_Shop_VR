@@ -47,7 +47,6 @@ public class SnapTarget : MonoBehaviour
         if (tutorialManager == null)
         {
             tutorialManager = Object.FindFirstObjectByType<ToturialManager>();
-
         }
         
 

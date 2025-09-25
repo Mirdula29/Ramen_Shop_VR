@@ -35,7 +35,7 @@ public class ToturialManager : MonoBehaviour
         arrowInstance.SetActive(false);
 
         objectPicked = new bool[Mathf.Max(1, objectSpot.Length)];
-        ShowMessage("Follow the Arrow to start.");
+        ShowMessage("Press 'OK' Button to start the game. Follow the Arrow to know the place of the objects");
     }
    
     void ShowMessage(string text)
@@ -116,7 +116,7 @@ public class ToturialManager : MonoBehaviour
             }
             else
             {
-                ShowMessage("Tutorial complete! Well done!");
+                ShowMessage("Grate!You have placed all the object correctly, Well done!");
             }
         }
     }
