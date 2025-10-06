@@ -38,7 +38,7 @@ public class StartMenu : MonoBehaviour
         // Show the first tutorial message
         if (toturialManager != null)
         {
-            toturialManager.ShowMessage("Press 'OK' Button to start the game. Follow the Arrow to know the place of the objects");
+            toturialManager.ShowMessage("Follow the Arrow to know the place of the objects. Press 'OK' button to close ui and start the game");
         }
     }
 }
