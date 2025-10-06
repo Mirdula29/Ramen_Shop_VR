@@ -12,28 +12,33 @@ public class StartMenu : MonoBehaviour
     [Header("Player Movement Controller")]
     public ContinuousMoveProvider moveProvider; // XR locomotion script
 
+    public ToturialManager toturialManager;
     void Start()
     {
-        // Lock player movement at the beginning
-        if (moveProvider != null)
-            moveProvider.enabled = false;
+        Debug.Log("StartMenu script initialized.");
 
-        // Show start menu
+        // Show only start menu at the beginning
         if (startMenuPanel != null)
             startMenuPanel.SetActive(true);
 
-        // Hook button
+        // Make sure tutorial UI is hidden initially
+        if (toturialManager != null && toturialManager.messagepanel != null)
+            toturialManager.messagepanel.SetActive(false);
+
+        // Hook up the Play button
         playButton.onClick.AddListener(StartGame);
     }
 
-    void StartGame()
+    public void StartGame()
     {
-        // Hide menu
+        // Hide start menu
         if (startMenuPanel != null)
             startMenuPanel.SetActive(false);
 
-        // Enable movement
-        if (moveProvider != null)
-            moveProvider.enabled = true;
+        // Show the first tutorial message
+        if (toturialManager != null)
+        {
+            toturialManager.ShowMessage("Press 'OK' Button to start the game. Follow the Arrow to know the place of the objects");
+        }
     }
 }

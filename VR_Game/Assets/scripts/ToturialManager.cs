@@ -18,6 +18,7 @@ public class ToturialManager : MonoBehaviour
 
 
     [Header("UI Elements")]
+
     public Transform UIShift;
     public GameObject messagepanel;
     public TMP_Text messageText;
@@ -25,7 +26,9 @@ public class ToturialManager : MonoBehaviour
 
     private int steps = 0;
     private bool[] objectPicked;
+    
     private GameObject arrowInstance;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,11 +38,14 @@ public class ToturialManager : MonoBehaviour
         arrowInstance.SetActive(false);
 
         objectPicked = new bool[Mathf.Max(1, objectSpot.Length)];
-        ShowMessage("Press 'OK' Button to start the game. Follow the Arrow to know the place of the objects");
+        messagepanel.SetActive(false);
     }
+
    
-    void ShowMessage(string text)
+    public void ShowMessage(string text)
     {
+        
+
         messagepanel.SetActive(true);
         messageText.text = text;
         okButton.onClick.RemoveAllListeners();
